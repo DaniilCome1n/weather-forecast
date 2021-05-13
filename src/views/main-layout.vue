@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: "main-layout",
   data() {
@@ -26,6 +28,14 @@ export default {
       loading: false,
     };
   },
+  mounted() {
+    this.getWeather()
+  },
+  methods:{
+    ...mapActions([
+      'getWeather'
+    ]),
+  }
 };
 </script>
 
