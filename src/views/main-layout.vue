@@ -1,46 +1,48 @@
 <template>
   <div class="main-wrapper">
-    <v-card :loading="loading" class="mx-auto my-12" max-width="374">
-      <template slot="progress">
-        <v-progress-linear
-          color="deep-purple"
-          height="5"
-          indeterminate
-        ></v-progress-linear>
-      </template>
-      <v-card-title>Cafe Badilico</v-card-title>
-      <v-card-text></v-card-text>
-      <v-divider class="mx-4"></v-divider>
-      <v-card-title>Tonight's availability</v-card-title>
-      <v-card-text></v-card-text>
-      <v-card-actions></v-card-actions>
-    </v-card>
+    <div class="search-wrapper">
+      <v-text-field
+        v-model="cityName"
+        label="Найди свой город"
+        append-icon="mdi-cloud-search"
+        outlined
+        shaped
+        @click:append="findWeatherByCity"
+      ></v-text-field>
+    </div>
+    <weatherCard />
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
+import weatherCard from "@/components/weather-card";
 
 export default {
+  components: {
+    weatherCard,
+  },
   name: "main-layout",
   data() {
     return {
-      loading: false,
+      cityName: "",
     };
   },
-  mounted() {
-    this.getWeather()
+  async mounted() {
+    await this.getWeather();
   },
-  methods:{
-    ...mapActions([
-      'getWeather'
-    ]),
-  }
+  methods: {
+    ...mapActions(["getWeather"]),
+    findWeatherByCity() {
+      this.getWeather(this.cityName);
+    },
+  },
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .main-wrapper {
+  font-family: 'Montserrat', sans-serif;
   width: 100%;
   height: 100vh;
   position: absolute;
@@ -48,7 +50,12 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  .search-wrapper {
+    height: 50px;
+    width: 350px;
+  }
 }
 </style>
