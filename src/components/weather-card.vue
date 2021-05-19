@@ -1,30 +1,38 @@
 <template>
-  <v-card v-if="!currentWeather.isEmpty" class="mx-auto my-2" width="350">
-    <v-card-title>{{ currentWeather.city }}</v-card-title>
-    <div class="main-info">
+  <v-card v-if="!currentWeather.isEmpty" class="mx-auto" min-width="370" max-width="350" color="secondary" elevation="7">
+    <SearchField />
+    <v-card-title v-if="error === ''" class="py-0">{{ currentWeather.city }}</v-card-title>
+    <v-card-title v-else>{{ error}}</v-card-title>
+    <div class="main-info py-0 px-4" v-if="error === ''">
       <div class="left">
         <img
           :src="require(`@/assets/weather-icons/${currentWeather.weatherIcon}.svg`)"
           alt="weather-icon"
+          class="mt-1"
         />
-        <span class="left__description">{{ currentWeather.description }}</span>
       </div>
       <div class="right">
         <span class="right__degrees" v-html="`${currentWeather.temp}&degC`"></span>
       </div>
     </div>
-    <v-card-text></v-card-text>
-    <v-divider class="mx-4"></v-divider>
-    <v-card-title>Tonight's availability</v-card-title>
-    <v-card-text></v-card-text>
-    <v-card-actions></v-card-actions>
+    <div class="sub-info px-4 mb-4 d-flex flex-column" v-if="error === ''" >
+      <span class="sub-info__description">{{ currentWeather.description }}</span>
+      <div class="bottom d-flex justify-space-between">
+        <span class="bottom__wind">Ветер: {{ currentWeather.wind }}м/с</span>
+        <span class="bottom__feels-like" v-html="`Ощущается как: ${currentWeather.feelsLike}&degC`"></span>
+      </div>
+    </div>
   </v-card>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import SearchField from "@/components/search-field";
 
 export default {
+  components: {
+    SearchField,
+  },
   name: "weather-card",
   data() {
     return {};
@@ -32,6 +40,7 @@ export default {
   computed: {
     ...mapGetters([
       "currentWeather",
+      "error"
     ]),
   },
   mounted() {
@@ -44,17 +53,13 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 15px;
   .left {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     img {
       width: 110px;
-    }
-    .left__description::first-letter{
-      text-transform: uppercase;
     }
   }
   .right {
@@ -62,6 +67,14 @@ export default {
     .right__degrees{
       font-size: 60px;
     }
+  }
+}
+.sub-info{
+  .sub-info__description{
+    white-space: nowrap;
+  }
+  .sub-info__description::first-letter{
+    text-transform: uppercase;
   }
 }
 </style>

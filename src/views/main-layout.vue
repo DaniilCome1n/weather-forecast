@@ -1,22 +1,12 @@
 <template>
   <div class="main-wrapper">
-    <div class="search-wrapper">
-      <v-text-field
-        v-model="cityName"
-        label="Найди свой город"
-        append-icon="mdi-cloud-search"
-        outlined
-        shaped
-        @click:append="findWeatherByCity"
-      ></v-text-field>
-    </div>
     <weatherCard />
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import weatherCard from "@/components/weather-card";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -29,14 +19,11 @@ export default {
     };
   },
   async mounted() {
-    await this.getWeather();
+    await this.getWeather({});
   },
-  methods: {
+  methods:{
     ...mapActions(["getWeather"]),
-    findWeatherByCity() {
-      this.getWeather(this.cityName);
-    },
-  },
+  }
 };
 </script>
 
