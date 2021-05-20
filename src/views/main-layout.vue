@@ -27,11 +27,11 @@ export default {
           lon: pos.coords.longitude,
         };
 
-        this.$store.commit('setGeo', geo);
+        this.$store.commit("setGeo", geo);
         this.getWeather({ lat: geo.lat, lon: geo.lon });
       },
       (err) => {
-        console.log(err)
+        console.log(err);
         this.getWeather({});
       }
     );

@@ -43,7 +43,7 @@ export default new Vuex.Store({
       };
     },
     geo: (state) => {
-      return state.geo
+      return state.geo;
     },
     error: (state) => {
       return state.error;
@@ -59,7 +59,9 @@ export default new Vuex.Store({
         lon: lon,
       };
       const response = await fetch(
-        `${baseURL}?${getQuery(data)}&units=metric&lang=ru&appid=${this.state.apiKey}`
+        `${baseURL}?${getQuery(data)}&units=metric&lang=ru&appid=${
+          this.state.apiKey
+        }`
       );
       const currentWeather = await response.json();
       if (currentWeather.cod === "404") {
