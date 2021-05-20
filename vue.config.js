@@ -1,4 +1,4 @@
 module.exports = {
   publicPath:
-    '/weather-forecast/',
+    process.env.NODE_ENV === "production" ? "/weather-forecast/" : "/",
 };
