@@ -16,20 +16,35 @@ export default {
   data() {
     return {
       cityName: "",
+      location: null,
     };
   },
   async mounted() {
-    await this.getWeather({});
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const geo = {
+          lat: pos.coords.latitude,
+          lon: pos.coords.longitude,
+        };
+
+        this.$store.commit('setGeo', geo);
+        this.getWeather({ lat: geo.lat, lon: geo.lon });
+      },
+      (err) => {
+        console.log(err)
+        this.getWeather({});
+      }
+    );
   },
-  methods:{
+  methods: {
     ...mapActions(["getWeather"]),
-  }
+  },
 };
 </script>
 
 <style scoped lang="less">
 .main-wrapper {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   width: 100%;
   height: 100vh;
   position: absolute;

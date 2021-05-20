@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="!currentWeather.isEmpty" class="mx-auto" min-width="370" max-width="350" color="secondary" elevation="7">
+  <v-card v-if="!currentWeather.isEmpty" class="mx-auto" min-width="360" max-width="350" color="secondary" elevation="7">
     <SearchField />
     <v-card-title v-if="error === ''" class="py-0">{{ currentWeather.city }}</v-card-title>
     <v-card-title v-else>{{ error}}</v-card-title>

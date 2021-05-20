@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     apiKey: "3ef8cdde52fcb98a90ec0fc5a0f5f476",
     weatherByCity: {},
+    geo: null,
     error: "",
   },
   mutations: {
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     setError(state, error) {
       state.error = error;
+    },
+    setGeo(state, geo) {
+      state.geo = geo;
     },
   },
   getters: {
@@ -37,6 +41,9 @@ export default new Vuex.Store({
           : Math.floor(state.weatherByCity.main.feels_like),
         wind: isForecastEmpty ? 0 : state.weatherByCity.wind.speed.toFixed(1),
       };
+    },
+    geo: (state) => {
+      return state.geo
     },
     error: (state) => {
       return state.error;

@@ -1,13 +1,14 @@
 function getQuery(object) {
+  if (!object) {
+    return "";
+  }
   const keys = Object.keys(object);
   let resultString = [];
-  if (keys.length !== 0) {
-    keys.map((key) => {
-      if (object[key] !== "") {
-        resultString.push(`${key}=${object[key]}`);
-      }
-    });
-  }
+  keys.map((key) => {
+    if (object[key] !== "") {
+      resultString.push(`${key}=${object[key]}`);
+    }
+  });
   return resultString.join("&");
 }
 
