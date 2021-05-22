@@ -20,6 +20,7 @@ export default {
     };
   },
   async mounted() {
+    this.getWeather({});
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const geo = {
@@ -32,7 +33,6 @@ export default {
       },
       (err) => {
         console.log(err);
-        this.getWeather({});
       }
     );
   },
