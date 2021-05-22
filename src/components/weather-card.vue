@@ -8,9 +8,7 @@
     elevation="7"
   >
     <SearchField />
-    <v-card-title v-if="error === ''" class="py-0">{{
-      currentWeather.city
-    }}</v-card-title>
+    <v-card-title v-if="error === ''" class="py-0">{{currentWeather.city}}</v-card-title>
     <v-card-title v-else>{{ error }}</v-card-title>
     <div class="main-info py-0 px-4" v-if="error === ''">
       <div class="left">
@@ -30,9 +28,7 @@
       </div>
     </div>
     <div class="sub-info px-4 mb-4 d-flex flex-column" v-if="error === ''">
-      <span class="sub-info__description">{{
-        currentWeather.description
-      }}</span>
+      <span class="sub-info__description">{{currentWeather.description}}</span>
       <div class="bottom d-flex justify-space-between">
         <span class="bottom__wind">Ветер: {{ currentWeather.wind }}м/с</span>
         <span

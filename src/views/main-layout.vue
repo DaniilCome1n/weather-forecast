@@ -20,7 +20,7 @@ export default {
     };
   },
   async mounted() {
-    this.getWeather({});
+    await this.getWeather({});
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const geo = {
@@ -48,9 +48,8 @@ export default {
   width: 100%;
   height: 100vh;
   position: absolute;
-  background-image: url("../assets/img/background.jpg");
+  background: #243032 url("../assets/img/background.jpg")  no-repeat ;
   background-size: cover;
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: center;
